@@ -1,0 +1,77 @@
+
+<mat-toolbar class="toolbar" role="banner">
+  <label>Cadastro</label>
+</mat-toolbar>
+
+<div class="container-fluid">
+  <div class="container">
+  <mat-form-field appearance="standard">
+    <mat-label>Filter</mat-label>
+    <input matInput (keyup)="filtrar($event)" placeholder="Ex. João" class="input-form" #input>
+  </mat-form-field>
+
+  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 demo-table" matSort>
+    <ng-container matColumnDef="codigo">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Código</th>
+      <td mat-cell *matCellDef="let user">{{user.codigo}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="nome">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Nome</th>
+      <td mat-cell *matCellDef="let user">{{user.nome}}</td>
+    </ng-container>
+
+
+    <ng-container matColumnDef="telefone">
+      <th mat-header-cell *matHeaderCellDef>Telefone</th>
+      <td mat-cell *matCellDef="let user">{{user.telefone}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="acoes">
+      <th mat-header-cell *matHeaderCellDef> </th>
+      <td mat-cell *matCellDef="let user">
+        <button mat-button class="botao" type="button"  (click)="excluir(user)">
+          <mat-icon class="icon">delete</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+
+  </div>
+</div>
+
+<div class="container-fluid">
+  <div class="container">
+  <form [formGroup]="formCadastrarUsuario" class="formulario" (ngSubmit)="salvar()">
+
+    <p>
+    <mat-form-field class="example-full-width" appearance="outline" >
+      <mat-label>Nome</mat-label>
+      <input matInput   class="input-form" id="nome" type="text" [(ngModel)]="novoUsuario.nome"  name="nome"  formControlName="nome" required/>
+    </mat-form-field>
+    </p>
+
+    <p>
+    <mat-form-field class="example-full-width" appearance="outline" >
+      <mat-label>Telefone</mat-label>
+      <input matInput class="input-form" id="telefone" type="text" [(ngModel)]="novoUsuario.telefone" name="telefone"  formControlName="telefone" required/>
+    </mat-form-field>
+    </p>
+
+    <div class="conjunto-bnt">
+      <div class="botao-wrapper btn">
+        <button mat-button class="botao" type="button" (click)="limpar()">Limpar</button>
+      </div>
+
+      <div class="botao-wrapper btn">
+        <button mat-button class="botao" type="submit">Salvar</button>
+      </div>
+    </div>
+  </form>
+  </div>
+</div>
+
+
+
